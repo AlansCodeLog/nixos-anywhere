@@ -166,7 +166,7 @@ while [[ $# -gt 0 ]]; do
     vm_test=y
     ;;
   --impure)
-     nix_copy_options+=("--impure")
+     nix_options+=("--impure")
      shift
     ;;
   *)

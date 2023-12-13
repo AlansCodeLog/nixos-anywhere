@@ -50,6 +50,7 @@ Options:
   build the closure on the remote machine instead of locally and copy-closuring it
 * --vm-test
   build the system and test the disk configuration inside a VM without installing it to the target.
+* --impure
 USAGE
 }
 
@@ -163,6 +164,10 @@ while [[ $# -gt 0 ]]; do
     ;;
   --vm-test)
     vm_test=y
+    ;;
+  --impure)
+     nix_copy_options+=("--impure")
+     shift
     ;;
   *)
     if [[ -z ${ssh_connection-} ]]; then

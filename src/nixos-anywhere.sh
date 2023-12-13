@@ -51,7 +51,7 @@ Options:
 * --vm-test
   build the system and test the disk configuration inside a VM without installing it to the target.
 * --impure
-  test
+  pass --impure to build 
 USAGE
 }
 
@@ -150,15 +150,15 @@ while [[ $# -gt 0 ]]; do
     nix_copy_options+=("--from" "$2")
     shift
     ;;
-  --impure)
-    nix_options+=("--impure")
-    ;;
   --option)
     key=$2
     shift
     value=$2
     shift
     nix_options+=("--option" "$key" "$value")
+    ;;
+  --impure)
+    nix_options+=("--impure")
     ;;
   --no-substitute-on-destination)
     substitute_on_destination=n

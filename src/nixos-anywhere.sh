@@ -51,6 +51,7 @@ Options:
 * --vm-test
   build the system and test the disk configuration inside a VM without installing it to the target.
 * --impure
+  test
 USAGE
 }
 
@@ -149,6 +150,9 @@ while [[ $# -gt 0 ]]; do
     nix_copy_options+=("--from" "$2")
     shift
     ;;
+  --impure)
+    nix_options+=("--impure")
+    ;;
   --option)
     key=$2
     shift
@@ -165,10 +169,7 @@ while [[ $# -gt 0 ]]; do
   --vm-test)
     vm_test=y
     ;;
-  --impure)
-     nix_options+=("--impure")
-     shift
-    ;;
+  
   *)
     if [[ -z ${ssh_connection-} ]]; then
       ssh_connection="$1"

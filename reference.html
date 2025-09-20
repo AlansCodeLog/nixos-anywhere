@@ -210,10 +210,6 @@ Options:
   ssh store settings appended to the store URI, e.g. "compress true". &lt;value&gt; needs to be URI encoded.
 * --post-kexec-ssh-port &lt;ssh_port&gt;
   after kexec is executed, use a custom ssh port to connect. Defaults to 22
-* --post-disko-script &lt;file&gt;
-  a script to run after the disko phase. Each line of the provided script file is executed as a separate command on the remote host.
-* --pre-install-script &lt;file&gt;
-  a script to run before the nixos-install phase. Each line of the provided script file is executed as a separate command on the remote host.
 * --copy-host-keys
   copy over existing /etc/ssh/ssh_host_* host keys to the installation
 * --extra-files &lt;path&gt;

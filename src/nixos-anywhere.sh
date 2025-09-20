@@ -42,6 +42,9 @@ postKexecSshPort=22
 buildOnRemote=n
 buildOn=auto
 envPassword=n
+preInstallScript=
+postInstallScript=
+
 
 # Facts set by get-facts.sh
 isOs=
@@ -153,6 +156,10 @@ Options:
   auto: tries to figure out, if the build is possible on the local host, if not falls back gracefully to remote build
   local: will build on the local host
   remote: will build on the remote host
+* --pre-install-script <path>
+  a script to run before the installation
+* --post-install-script <path>
+  a script to run after the installation
 USAGE
 }
 
@@ -345,6 +352,14 @@ parseArgs() {
       echo "WARNING: --build-on-remote is deprecated, use --build-on remote instead" 2>&1
       buildOnRemote=y
       buildOn="remote"
+      ;;
+    --pre-install-script)
+      preInstallScript=$2
+      shift
+      ;;
+    --post-install-script)
+      postInstallScript=$2
+      shift
       ;;
     --env-password)
       envPassword=y
@@ -948,8 +963,18 @@ SSH
     runDisko "$diskoScript"
   fi
 
+  if [[ -n ${preInstallScript} ]]; then
+    step "Running pre-install script"
+    source "${preInstallScript}"
+  fi
+
   if [[ ${phases[install]} == 1 ]]; then
     nixosInstall "$nixosSystem"
+  fi
+
+  if [[ -n ${postInstallScript} ]]; then
+    step "Running post-install script"
+    source "${postInstallScript}"
   fi
 
   if [[ ${phases[reboot]} == 1 ]]; then

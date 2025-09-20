@@ -86,4 +86,10 @@ Options:
   auto: tries to figure out, if the build is possible on the local host, if not falls back gracefully to remote build
   local: will build on the local host
   remote: will build on the remote host
+* --pre-install-script <path>
+  a script to run before the installation.
+  The script is executed using `source`, which means it runs in the same shell as `nixos-anywhere.sh`. This allows it to access the same variables (like `sshArgs`, `sshConnection`, `tempDir`, etc).
+* --post-install-script <path>
+  a script to run after the installation.
+  The script is executed using `source`, which means it runs in the same shell as `nixos-anywhere.sh`. This allows it to access the same variables (like `sshArgs`, `sshConnection`, `tempDir`, etc).
 ```

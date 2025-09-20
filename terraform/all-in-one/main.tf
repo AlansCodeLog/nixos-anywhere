@@ -39,6 +39,8 @@ module "install" {
   nixos_generate_config_path  = var.nixos_generate_config_path
   nixos_facter_path           = var.nixos_facter_path
   build_on_remote             = var.build_on_remote
+  pre_install_script          = var.pre_install_script
+  post_install_script         = var.post_install_script
   # deprecated attributes
   stop_after_disko = var.stop_after_disko
   no_reboot        = var.no_reboot

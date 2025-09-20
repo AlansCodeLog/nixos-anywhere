@@ -68,6 +68,30 @@ if [[ ${input[extra_files_script]} != "null" ]]; then
   args+=("--extra-files" "${tmpdir}/extra-files")
 fi
 
+if [[ ${input[pre_install_script]} != "null" ]]; then
+  if [[ ! -f ${input[pre_install_script]} ]]; then
+    echo "pre_install_script '${input[pre_install_script]}' does not exist"
+    exit 1
+  fi
+  if [[ ! -x ${input[pre_install_script]} ]]; then
+    echo "pre_install_script '${input[pre_install_script]}' is not executable"
+    exit 1
+  fi
+  args+=("--pre-install-script" "${input[pre_install_script]}")
+fi
+
+if [[ ${input[post_install_script]} != "null" ]]; then
+  if [[ ! -f ${input[post_install_script]} ]]; then
+    echo "post_install_script '${input[post_install_script]}' does not exist"
+    exit 1
+  fi
+  if [[ ! -x ${input[post_install_script]} ]]; then
+    echo "post_install_script '${input[post_install_script]}' is not executable"
+    exit 1
+  fi
+  args+=("--post-install-script" "${input[post_install_script]}")
+fi
+
 args+=("-p" "${input[target_port]}")
 args+=("${input[target_user]}@${input[target_host]}")
 

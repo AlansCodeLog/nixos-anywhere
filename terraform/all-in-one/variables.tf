@@ -149,3 +149,15 @@ variable "install_bootloader" {
   description = "Install/re-install the bootloader"
   default     = false
 }
+
+variable "pre_install_script" {
+  type        = string
+  description = "a script to run before the installation.\nThe script is executed using `source`, which means it runs in the same shell as `nixos-anywhere.sh`. This allows it to access the same variables (like `sshArgs`, `sshConnection`, `tempDir`, etc)."
+  default     = null
+}
+
+variable "post_install_script" {
+  type        = string
+  description = "a script to run after the installation.\nThe script is executed using `source`, which means it runs in the same shell as `nixos-anywhere.sh`. This allows it to access the same variables (like `sshArgs`, `sshConnection`, `tempDir`, etc)."
+  default     = null
+}
